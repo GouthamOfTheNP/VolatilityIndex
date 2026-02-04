@@ -1,0 +1,5 @@
+altair~=6.0.0
+pandas~=3.0.0
+pandas_ta~=0.4.71b0
+streamlit~=1.53.1
+yfinance~=1.1.0
