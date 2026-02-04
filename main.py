@@ -75,7 +75,7 @@ if ticker:
 				align='left', dx=5, dy=-5, color='orange'
 			).encode(y='y', text='label')
 
-			st.altair_chart(bar_chart + rule + text, use_container_width=True)
+			st.altair_chart(bar_chart + rule + text)
 
 			rsi_series = ta.rsi(df["Close"]).iloc[-252:]
 			rsi_df = rsi_series.to_frame(name="RSI").reset_index()
@@ -86,8 +86,8 @@ if ticker:
 			).properties(title="RSI (Momentum)", height=200)
 			rsi_lines = (alt.Chart(pd.DataFrame({'y': [30, 70]})).mark_rule(strokeDash=[5, 5], color='gray').encode(y='y'))
 
-			st.altair_chart(rsi_chart + rsi_lines, use_container_width=True)
-			
+			st.altair_chart(rsi_chart + rsi_lines)
+
 			atr_line = alt.Chart(plot_df).mark_area(
 				line={'color':'gray'},
 				color=alt.Gradient(
@@ -101,6 +101,6 @@ if ticker:
 				y=alt.Y("ATR:Q", title="ATR (Volatility)")
 			).properties(height=200)
 
-			st.altair_chart(atr_line, use_container_width=True)
+			st.altair_chart(atr_line)
 	else:
 		st.error("Not enough data. Please check ticker.")
