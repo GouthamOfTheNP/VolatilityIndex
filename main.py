@@ -5,7 +5,7 @@ import streamlit as st
 import yfinance as yf
 
 st.set_page_config(layout="wide", page_title="VIX 10", page_icon=":chart_with_upwards_trend:")
-st.title("Volatility Index")
+st.title("Volatility Indices")
 
 ticker = st.text_input("Enter Ticker Symbol", value="NVDA", max_chars=10).upper()
 
