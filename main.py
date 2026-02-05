@@ -4,8 +4,8 @@ import pandas_ta as ta
 import streamlit as st
 import yfinance as yf
 
-st.set_page_config(layout="wide", page_title="Absolute VIX", page_icon=":chart_with_upwards_trend:")
-st.title("Volatility Index (Absolute Scale)")
+st.set_page_config(layout="wide", page_title="VIX 10", page_icon=":chart_with_upwards_trend:")
+st.title("Volatility Index")
 
 ticker = st.text_input("Enter Ticker Symbol", value="NVDA", max_chars=10).upper()
 
@@ -27,7 +27,7 @@ if ticker:
 		VOLATILITY_CAP_PCT = 0.06
 
 		score_abs_daily = map_to_scale(last_row['Abs_Daily_Move'], VOLATILITY_CAP_PCT)
-		score_abs_atr   = map_to_scale(last_row['ATR_Pct'], VOLATILITY_CAP_PCT)
+		score_abs_atr = map_to_scale(last_row['ATR_Pct'], VOLATILITY_CAP_PCT)
 		daily_rank = df['Abs_Daily_Move'].rank(pct=True).iloc[-1] * 10
 
 		final_vix = (score_abs_daily * 0.50) + (score_abs_atr * 0.30) + (daily_rank * 0.20)
@@ -70,7 +70,7 @@ if ticker:
 				tooltip=["Date:T", alt.Tooltip("Daily_Return", format=".2%")]
 			).properties(title="Daily % Moves (Absolute Scale)", height=300)
 
-			rule = alt.Chart(pd.DataFrame({'y': [VOLATILITY_CAP_PCT]})).mark_rule(color='orange', strokeDash=[5,5]).encode(y='y')
+			rule = alt.Chart(pd.DataFrame({'y': [VOLATILITY_CAP_PCT]})).mark_rule(color='orange', strokeDash=[5, 5]).encode(y='y')
 			text = alt.Chart(pd.DataFrame({'y': [VOLATILITY_CAP_PCT], 'label': ['Max Vol Threshold (6%)']})).mark_text(
 				align='left', dx=5, dy=-5, color='orange'
 			).encode(y='y', text='label')
@@ -89,7 +89,7 @@ if ticker:
 			st.altair_chart(rsi_chart + rsi_lines)
 
 			atr_line = alt.Chart(plot_df).mark_area(
-				line={'color':'gray'},
+				line={'color': 'gray'},
 				color=alt.Gradient(
 					gradient='linear',
 					stops=[alt.GradientStop(offset=0, color='white'),
